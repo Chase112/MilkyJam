@@ -84,18 +84,20 @@ public class RigidbodyMovement : MonoBehaviour
 
 
         bool grounded = !_groundDetector || _groundDetector.grounded;
-        float speed = grounded ? movementSpeed : flyingMovementSpeed;
-        speed *= _body.mass;
+        if (grounded)
+        {
+            float speed = grounded ? movementSpeed : flyingMovementSpeed;
+            speed *= _body.mass;
 
-        Vector2 force = _inputHolder.positionInput.normalized * speed;
-        _body.AddForce(force.To3D());
+            Vector2 force = _inputHolder.positionInput.normalized * speed;
+            _body.AddForce(force.To3D());
 
-
-        // additional damping
-        Vector3 velocity = _body.velocity;
-        velocity.x *= xyDamping;
-        velocity.z *= xyDamping;
-        _body.velocity = velocity;
-
+        
+            // additional damping
+            Vector3 velocity = _body.velocity;
+            velocity.x *= xyDamping;
+            velocity.z *= xyDamping;
+            _body.velocity = velocity;
+        }
     }
 }
