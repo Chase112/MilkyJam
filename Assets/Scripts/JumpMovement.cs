@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InputHolder))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(GroundDetector))]
-public class JumpMovement : MonoBehaviour
+[RequireComponent(typeof(InputHolder))]
+public class JumpMovement : MonoBehaviour, IRigidbodyDepended
 {
+    public Timer tRestart;
     public float jumpForce;
     public float forwardForce;
 
@@ -20,7 +20,7 @@ public class JumpMovement : MonoBehaviour
     {
         _inputHolder = GetComponent<InputHolder>();
         _body = GetComponent<Rigidbody>();
-        _groundDetector = GetComponent<GroundDetector>();
+        _groundDetector = GetComponentInChildren<GroundDetector>();
     }
 
 
@@ -34,7 +34,7 @@ public class JumpMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(grounded && _jumpQueued)
+        if(grounded && _jumpQueued && tRestart.IsReadyRestart())
         {
             _body.AddForce(Vector3.up * jumpForce + transform.forward * forwardForce);
             _jumpQueued = false;
