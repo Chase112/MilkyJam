@@ -79,6 +79,11 @@ public class BendTheWorld : MonoBehaviour
 
             Transform newTransf = Instantiate(child,posG,child.rotation,GameObject.Find("Twisted").transform);
 
+
+            var rigidbodyDepended = newTransf.GetComponentsInChildren<IRigidbodyDepended>();
+            foreach (var it in rigidbodyDepended)
+                Destroy( (it as MonoBehaviour) );
+
             if (newTransf.GetComponent<Rigidbody>()!=null)
             Destroy(newTransf.GetComponent<Rigidbody>());
             //newTransf.GetComponent<Rigidbody>().isKinematic = true;

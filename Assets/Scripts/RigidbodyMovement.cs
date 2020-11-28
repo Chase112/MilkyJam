@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(InputHolder))]
-public class RigidbodyMovement : MonoBehaviour
+public class RigidbodyMovement : MonoBehaviour, IRigidbodyDepended
 {
     public float movementSpeed = 1.0f;
     public float flyingMovementSpeed = 1.0f;
@@ -19,6 +19,8 @@ public class RigidbodyMovement : MonoBehaviour
 
     [System.NonSerialized] public bool atExternalRotation;
 
+    public Transform rotationTarget;
+
     Rigidbody _body;
     InputHolder _inputHolder;
 
@@ -29,9 +31,9 @@ public class RigidbodyMovement : MonoBehaviour
     {
         _body = GetComponent<Rigidbody>();
         _inputHolder = GetComponent<InputHolder>();
-        _groundDetector = GetComponent<GroundDetector>();
+        _groundDetector = GetComponentInChildren<GroundDetector>();
 
-        desiredRotation = _body.rotation.eulerAngles.y;
+        desiredRotation = rotationTarget.eulerAngles.y;
     }
 
     void FixedUpdate()
@@ -46,19 +48,19 @@ public class RigidbodyMovement : MonoBehaviour
         atExternalRotation = true;
         desiredRotation = -Vector2.SignedAngle(externalRotation, Vector2.up);
 
-        float currentRotation = _body.rotation.eulerAngles.y;
+        float currentRotation = rotationTarget.eulerAngles.y;
         float newRotation = Mathf.LerpAngle(currentRotation, desiredRotation, rotationSpeed);
-        _body.rotation = Quaternion.Euler(0, -newRotation, 0);
+        rotationTarget.rotation = Quaternion.Euler(0, -newRotation, 0);
     }
     public void ApplyExternalRotationSide(Vector2 externalRotation, float maxDifference)
     {
         atExternalRotation = true;
         desiredRotation = -Vector2.SignedAngle(externalRotation, Vector2.up);
 
-        float currentRotation = _body.rotation.eulerAngles.y;
+        float currentRotation = rotationTarget.eulerAngles.y;
         float difference = Mathf.Clamp(desiredRotation - currentRotation, -maxDifference, maxDifference);
         float newRotation = currentRotation + difference;
-        _body.rotation = Quaternion.Euler(0, -newRotation, 0);
+        rotationTarget.rotation = Quaternion.Euler(0, -newRotation, 0);
     }
 
 
@@ -73,9 +75,9 @@ public class RigidbodyMovement : MonoBehaviour
             desiredRotation = -Vector2.SignedAngle(_inputHolder.positionInput, Vector2.up);
         // else;
 
-        float currentRotation = -_body.rotation.eulerAngles.y;
+        float currentRotation = -rotationTarget.rotation.eulerAngles.y;
         float newRotation = Mathf.LerpAngle(currentRotation, desiredRotation, rotationSpeed);
-        _body.rotation = Quaternion.Euler(0,  -newRotation, 0);
+        rotationTarget.rotation = Quaternion.Euler(0,  -newRotation, 0);
     }
     void UpdatePosition()
     {
@@ -84,20 +86,18 @@ public class RigidbodyMovement : MonoBehaviour
 
 
         bool grounded = !_groundDetector || _groundDetector.grounded;
-        if (grounded)
-        {
-            float speed = grounded ? movementSpeed : flyingMovementSpeed;
-            speed *= _body.mass;
 
-            Vector2 force = _inputHolder.positionInput.normalized * speed;
-            _body.AddForce(force.To3D());
+        float speed = grounded ? movementSpeed : flyingMovementSpeed;
+        speed *= _body.mass;
 
-        
-            // additional damping
-            Vector3 velocity = _body.velocity;
-            velocity.x *= xyDamping;
-            velocity.z *= xyDamping;
-            _body.velocity = velocity;
-        }
+        Vector2 force = _inputHolder.positionInput.normalized * speed;
+        _body.AddForce(force.To3D());
+
+
+        // additional damping
+        Vector3 velocity = _body.velocity;
+        velocity.x *= xyDamping;
+        velocity.z *= xyDamping;
+        _body.velocity = velocity;
     }
 }

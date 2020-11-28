@@ -29,7 +29,7 @@ public class InputControllerMouseKeyboard : InputController
 
         /// position
         inputHolder.positionInput.x = Input.GetAxis(positionAxisCodeX);
-        inputHolder.positionInput.y = Input.GetAxis(positionAxisCodeY);
+        //inputHolder.positionInput.y = Input.GetAxis(positionAxisCodeY);
 
         /// direction
         /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
