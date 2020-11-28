@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BendTheWorld : MonoBehaviour
 {
-    const int n = 32;
+    const int n = 36;
     //List<BendItem> objs = new List<BendItem>();
     List<BendItem> twisted = new List<BendItem>();
     public float fOffset = 180.0f;
@@ -75,7 +75,7 @@ public class BendTheWorld : MonoBehaviour
             if (id<startID || id>=endID) continue;
 
             Vector3 posG = child.position;
-            posG.z = 5.0f;
+            posG.z += 5.0f;
 
             Transform newTransf = Instantiate(child,posG,child.rotation,GameObject.Find("Twisted").transform);
 
@@ -119,7 +119,7 @@ public class BendTheWorld : MonoBehaviour
 
      Vector3 GetCircle(Vector3 center,float radius,float ang)
      {
-        while (ang>360.0f) ang-=360.0f;
+        //while (ang>360.0f) ang-=360.0f;
         Vector3 pos = new Vector3();
         pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
         pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);

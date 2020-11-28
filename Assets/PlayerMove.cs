@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
         {
             Vector3 pos = transform.position;
             pos.x-=5.0f*Time.deltaTime;
-            if (pos.x<9.8f) pos.x = 9.8f;
+            if (pos.x<10.57f) pos.x = 10.57f;
             transform.SetPositionAndRotation(pos,transform.rotation);
         }
 
