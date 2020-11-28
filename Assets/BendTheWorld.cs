@@ -150,7 +150,8 @@ public class BendTheWorld : MonoBehaviour
         {
             for (int i=0;i<twisted.Count;i++)
             {
-                int id = twisted[i].nID;
+                float id = twisted[i].transform.position.x;
+                //twisted[i].nID;
                 Transform g = twisted[i].transform;
 //              int id = objs[i].nID;
 //              Transform g = objs[i].transform;

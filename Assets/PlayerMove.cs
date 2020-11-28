@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
             pos.x+=5.0f*Time.deltaTime;
             transform.SetPositionAndRotation(pos,transform.rotation);
         }
+
         if (Input.GetKey(KeyCode.LeftArrow)) 
         {
             Vector3 pos = transform.position;
@@ -26,5 +27,16 @@ public class PlayerMove : MonoBehaviour
             transform.SetPositionAndRotation(pos,transform.rotation);
         }
 
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+        if (GetComponent<Rigidbody>().velocity.y<0.01f)
+        {
+            //transform.Find("Capsule").
+            GetComponent<Rigidbody>().velocity = new Vector3(0.0f,300.0f*Time.deltaTime,0.0f);
+           // Debug.Log("jump");
+        }
     }
+
+     void FixedUpdate()
+     {
+     }
 }
