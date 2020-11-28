@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
            // Debug.Log("jump");
         }
 
-        RenderSettings.skybox.SetFloat("_Rotation", 16.0f*Time.fixedTime);
+        //RenderSettings.skybox.SetFloat("_Rotation", 16.0f*Time.fixedTime);
     }
 
      void FixedUpdate()

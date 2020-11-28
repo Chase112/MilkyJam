@@ -156,7 +156,7 @@ public class BendTheWorld : MonoBehaviour
 //              int id = objs[i].nID;
 //              Transform g = objs[i].transform;
 
-                Vector3 center = new Vector3(0,0,-g.position.z);
+                Vector3 center = new Vector3(0,0,g.position.z);
                 float xPlayerDel = xPlayer - (int)xPlayer;
                 float fAngleSpan = 360.0f/(float)n;
                 float fAngle = fOffset + (id-xPlayer)*fAngleSpan;
