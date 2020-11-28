@@ -164,6 +164,7 @@ public class BendTheWorld : MonoBehaviour
                 Vector3 circ = GetCircle(center,n/(2.0f*Mathf.PI)-g.position.y,-fAngle);
                 Vector3 pos = circ;
                 Quaternion rot = Quaternion.LookRotation(new Vector3(0,0,1.0f),center-circ);               
+                pos.x -=100.0f;
                                 
                 twisted[i].transform.SetPositionAndRotation(pos,rot);                
             }

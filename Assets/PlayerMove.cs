@@ -35,6 +35,8 @@ public class PlayerMove : MonoBehaviour
             GetComponent<Rigidbody>().velocity = new Vector3(0.0f,300.0f*Time.deltaTime,0.0f);
            // Debug.Log("jump");
         }
+
+        RenderSettings.skybox.SetFloat("_Rotation", 16.0f*Time.fixedTime);
     }
 
      void FixedUpdate()
