@@ -9,6 +9,7 @@ public interface IInteractible {
 public class FallingTree : MonoBehaviour, IInteractible
 {
 
+    bool bHasFallen = false;
     public void PerformInteraction()
     {
         StartCoroutine("FallTree");
@@ -24,10 +25,15 @@ public class FallingTree : MonoBehaviour, IInteractible
 
     IEnumerator FallTree() 
     {
-        for (float ft = 0.0f; ft >= fAngle; ft -= 0.2f) 
+        if (!bHasFallen)
         {
-            transform.Rotate(new Vector3(0,0,-0.2f),Space.World);
-            yield return new WaitForSeconds(.0025f);
+            bHasFallen = true;
+
+            for (float ft = 0.0f; ft >= fAngle; ft -= 0.2f) 
+            {
+                transform.Rotate(new Vector3(0,0,-0.2f),Space.World);
+                yield return new WaitForSeconds(.0025f);
+            }
         }
     }
     // Update is called once per frame
