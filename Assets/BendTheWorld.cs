@@ -16,6 +16,14 @@ public class BendTheWorld : MonoBehaviour
         public int nID;
     }
 
+    string GetName(int id)
+    {
+        string num = id.ToString();
+        if (num.Length<2) num = "0" + num;
+        string name = "ground00 (" + num + ")";
+        return name;
+    }
+
     void CloneAll()
     {
         float xPlayer = GameObject.Find("Player").transform.position.x;
@@ -35,10 +43,12 @@ public class BendTheWorld : MonoBehaviour
         
         for (int id=startID;id<endID;id++)
         {
-            string num = id.ToString();
-            if (num.Length<2) num = "0" + num;
-            string name = "ground00 (" + num + ")";
-            Transform tr = orginals.transform.Find(name);
+            Transform tr = orginals.transform.Find(GetName(id));
+
+            //if (tr==null) {                
+              //  tr = orginals.transform.Find(GetName(id%150));
+            //}
+
             if (tr==null) continue;
             
             /*
