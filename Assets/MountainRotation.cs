@@ -14,7 +14,7 @@ public class MountainRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.active)
+        if (player.activeInHierarchy)
         {
             float fAngle = player.transform.position.x;        
             var rot = Quaternion.Euler(-90.0f,fAngle,0.0f);
