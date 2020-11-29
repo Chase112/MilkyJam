@@ -23,6 +23,20 @@ public class InteractionHandler : MonoBehaviour
             inter[i].PerformInteraction();
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        IInteractible[] inter = other.GetComponentsInChildren<IInteractible>();
+
+        if (inter.Length==0 && other.transform.parent!=null)
+        {
+            inter = other.transform.parent.GetComponentsInParent<IInteractible>();
+        }
+
+        for (int i=0;i<inter.Length;i++)
+            inter[i].EndInteraction();
+    }
+
+
     // Update is called once per frame
     void Update()
     {

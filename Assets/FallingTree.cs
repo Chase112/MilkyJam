@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IInteractible {
     void PerformInteraction();
+    void EndInteraction();
 }
 
 public class FallingTree : MonoBehaviour, IInteractible
@@ -13,6 +14,10 @@ public class FallingTree : MonoBehaviour, IInteractible
     public void PerformInteraction()
     {
         StartCoroutine("FallTree");
+    }
+
+    public void EndInteraction()
+    {        
     }
     // Start is called before the first frame update
 
