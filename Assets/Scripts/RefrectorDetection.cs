@@ -26,7 +26,7 @@ public class RefrectorDetection : MonoBehaviour, IRigidbodyDepended
             var detected = Physics.OverlapSphere(hitInfo.point, testRadius);
             foreach(var it in detected)
             {
-                var detectionMarker = it.GetComponent<IDetectionMarker>();
+                var detectionMarker = it.GetComponentInParent<IDetectionMarker>();
                 if(detectionMarker != null)
                 {
                     onDetect.Invoke();

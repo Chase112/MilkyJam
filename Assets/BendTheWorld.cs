@@ -136,8 +136,11 @@ public class BendTheWorld : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        var player = GameObject.Find("Player");
+        if (!player)
+            return;
         var orginals = GameObject.Find("Orginal");
-        float xPlayer = GameObject.Find("Player").transform.position.x;
+        float xPlayer = player.transform.position.x;
         //float xPlayer = orginals.Find("Player").transform.position.x;
         int nCenterID = (int)xPlayer;
         
