@@ -9,6 +9,7 @@ public interface IInteractible {
 
 public class FallingTree : MonoBehaviour, IInteractible
 {
+    public AudioSource audioSource;
 
     bool bHasFallen = false;
     public void PerformInteraction()
@@ -33,6 +34,7 @@ public class FallingTree : MonoBehaviour, IInteractible
         if (!bHasFallen)
         {
             bHasFallen = true;
+            audioSource.Play();
 
             for (float ft = 0.0f; ft >= fAngle; ft -= 0.4f) 
             {
