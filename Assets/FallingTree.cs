@@ -29,9 +29,9 @@ public class FallingTree : MonoBehaviour, IInteractible
         {
             bHasFallen = true;
 
-            for (float ft = 0.0f; ft >= fAngle; ft -= 0.2f) 
+            for (float ft = 0.0f; ft >= fAngle; ft -= 0.4f) 
             {
-                transform.Rotate(new Vector3(0,0,-0.2f),Space.World);
+                transform.Rotate(new Vector3(0,0,-0.4f),Space.World);
                 yield return new WaitForSeconds(.0025f);
             }
         }
