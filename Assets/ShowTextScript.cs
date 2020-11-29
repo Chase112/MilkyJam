@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ShowTextScript : MonoBehaviour,IInteractible
+public class ShowTextScript : MonoBehaviour, IInteractible
 {
 
     public string line1;
@@ -32,7 +32,6 @@ public class ShowTextScript : MonoBehaviour,IInteractible
     // Start is called before the first frame update
     void Start()
     {
-
         canvas.SetActive(false);
     }
 
